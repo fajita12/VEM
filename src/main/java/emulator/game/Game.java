@@ -9,7 +9,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -17,9 +16,7 @@ import javafx.stage.Screen;
 
 import java.io.File;
 
-import static emulator.gui.Window.NUM_ITEMS_ROW;
-import static emulator.gui.Window.WINDOW_X;
-import static emulator.gui.Window.WINDOW_Y;
+import static emulator.gui.Window.*;
 
 public class Game{
 	//modules
@@ -30,6 +27,7 @@ public class Game{
 	//game vars
 	private final File GAME;
 	private final String GAME_NAME;
+	private final String GAME_DISPLAY;
 	private final File GAME_IMAGE;
 	private final int GAME_YEAR;
 	private final String GAME_COMPANY;
@@ -38,8 +36,9 @@ public class Game{
 	
 	
 	//constructor
-	public Game(File game, String game_name, File game_image, int game_year, String game_company, String game_description, EmulatorType type) throws Exception {
+	public Game(String game_name, File game, String game_display, File game_image, int game_year, String game_company, String game_description, EmulatorType type) throws Exception {
 		this.GAME = game;
+		this.GAME_DISPLAY = game_display;
 		this.GAME_NAME = game_name;
 		this.GAME_IMAGE = game_image;
 		this.GAME_YEAR = game_year;
@@ -67,7 +66,7 @@ public class Game{
 	@Override
 	public String toString(){
 		StringBuilder sb = new StringBuilder();
-		sb.append(GAME_NAME).append(" ")
+		sb.append(GAME_DISPLAY).append(" ")
 				.append(GAME_YEAR).append(" ")
 				.append(GAME_COMPANY).append(" ")
 				.append(GAME_DESCRIPTION);
@@ -78,7 +77,6 @@ public class Game{
 	public Button getButton(){
         Button b = new Button();
 	    try {
-            System.out.println(GAME_IMAGE.getName());
             b.setStyle("-fx-background-image: url('covers/" + GAME_IMAGE.getName() + "'); " +
                     "   -fx-background-position: center center;" +
                     "   -fx-background-color: rgba(255, 255, 255, 0.5);" +
@@ -91,7 +89,6 @@ public class Game{
             b.setOnAction(new EventHandler<ActionEvent>() {
 
                 public void handle(ActionEvent event) {
-                    System.out.println(GAME_NAME);
                     //load next screen
                     Window.window.setScene(new Scene(getSavePane(), WINDOW_X, WINDOW_Y));
                     Window.window.show();
@@ -114,8 +111,8 @@ public class Game{
         saves.setVgap(0);
         saves.setPadding(new Insets(0, 0, 0, 0));
 
-        for(int i = 0; i < saveManager.getSaves().length; i++){
-            saves.add(getSaveButton(saveManager.getSaves()[i]), i % 2, i / 2);
+        for(int i = 0; i <= SaveManager.MAX_SAVE_INDEX; i++){
+            saves.add(getSaveButton(saveManager.getSaves().length > i ? saveManager.getSaves()[i] : null), i % 2, i / 2);
         }
 
         //configure about pane
@@ -141,7 +138,6 @@ public class Game{
     private Button getSaveButton(File save){
         Button b = new Button();
         try {
-            System.out.println(GAME_IMAGE.getName());
             b.setStyle("-fx-background-image: url('img/saveBackground.png'); " +
                     "   -fx-background-position: center center;" +
                     "   -fx-background-color: rgba(255, 255, 255, 0.5);" +
@@ -162,7 +158,7 @@ public class Game{
                 public void handle(ActionEvent event) {
                     //load next screen
                     emulator.start(GAME);
-
+                    Window.resetPane();
                 }
             });
         }catch (Exception c){}

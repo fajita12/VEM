@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LibraryEngine{
 	//general vars
-	public static final File PLAYABLE_DIRECTORY = new File("C:/");
+	public static final File PLAYABLE_DIRECTORY = new File("roms/");
 	public static final String gamesFile = "games.csv";
 
 	//modules

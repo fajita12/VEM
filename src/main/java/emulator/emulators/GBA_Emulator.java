@@ -4,15 +4,15 @@ import java.io.File;
 
 public class GBA_Emulator extends Emulator {
 
-    private static String executable = "C:\\visualboyemulator-m.exe";
+    private static String executable = new File("emulators\\gba.exe").getAbsolutePath();
     private static String args = "";
 
     public void start(File game) {
         Runtime rt = Runtime.getRuntime();
-        //Process pr = rt.exec("cmd /c dir");
         try {
             System.out.println(buildcmd(game));
             Process pr = rt.exec(buildcmd(game));
+            int res = pr.waitFor();
         }catch(Exception e){
             System.out.println("FAILED");
         }
@@ -31,8 +31,8 @@ public class GBA_Emulator extends Emulator {
 
         StringBuilder sb = new StringBuilder();
         sb.append(executable).append(" ")
-                .append(args).append(" ")
-                .append(gameString);
+                .append(args).append(" \"")
+                .append(gameString).append("\"");
 
         return (sb.toString());
     }

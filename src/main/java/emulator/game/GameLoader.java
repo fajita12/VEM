@@ -12,6 +12,7 @@ public class GameLoader {
 
     private static final String IMAGE_EXTENSION = ".png";
     private static final String GAME_EXTENSION = ".zip";
+    private static final String ROM_DIRECTORY = "roms\\";
 
     public Game loadGame(String line) throws Exception {
         String[] items = line.split(",");
@@ -23,7 +24,7 @@ public class GameLoader {
         String company = items[4];
         String description = items[5];
 
-        return (new Game(new File(fileName + GAME_EXTENSION), displayName, new File(fileName + IMAGE_EXTENSION), year, company, description, EmulatorType.valueOf(console)));
+        return (new Game(fileName, new File(ROM_DIRECTORY + fileName + GAME_EXTENSION), displayName, new File(fileName + IMAGE_EXTENSION), year, company, description, EmulatorType.valueOf(console)));
     }
 
     public List<Game> loadGames(String filePath) throws Exception {

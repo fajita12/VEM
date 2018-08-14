@@ -32,16 +32,21 @@ public class Window extends Application {
         launch(args);
     }
 
+    public static void resetPane(){
+        window.setScene(new Scene(getMainPane(), WINDOW_X, WINDOW_Y));
+        window.show();
+    }
+
     @Override
     public void start(Stage primaryStage) {
         window = primaryStage;
         primaryStage.setTitle("Visual Emulator: VEM");
 
-        primaryStage.setScene(new Scene(getMainPanel(), WINDOW_X, WINDOW_Y));
+        primaryStage.setScene(new Scene(getMainPane(), WINDOW_X, WINDOW_Y));
         primaryStage.show();
     }
 
-    public ScrollPane getMainPanel(){
+    public static ScrollPane getMainPane(){
         ScrollPane pane = new ScrollPane();
         pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);

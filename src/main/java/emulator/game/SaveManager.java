@@ -1,7 +1,7 @@
 package emulator.game;
 
 import java.io.File;
-import java.util.List;
+import java.io.FilenameFilter;
 
 public class SaveManager{
 	//general vars
@@ -31,7 +31,11 @@ public class SaveManager{
 	private FileUpdateListener fileUpdateListener;
 	
 	public File[] getSaves(){
-	    return (SAVE_DIRECTORY.listFiles());
+		return (SAVE_DIRECTORY.listFiles(new FilenameFilter() {
+			public boolean accept(File dir, String name) {
+				return name.toLowerCase().endsWith(".sgm") && name.contains(GAME_NAME);
+			}
+		}));
     }
 
 	public void deleteSave(int saveIndex){
