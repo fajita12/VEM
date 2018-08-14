@@ -18,70 +18,70 @@ import java.io.File;
 
 import static emulator.gui.Window.*;
 
-public class Game{
-	//modules
-	private SaveManager saveManager;
-	private Emulator emulator;
-	private GameGUIBuilder guiBuilder;
-	
-	//game vars
-	private final File GAME;
-	private final String GAME_NAME;
-	private final String GAME_DISPLAY;
-	private final File GAME_IMAGE;
-	private final int GAME_YEAR;
-	private final String GAME_COMPANY;
-	private final String GAME_DESCRIPTION;
-	private final EmulatorType TYPE;
-	
-	
-	//constructor
-	public Game(String game_name, File game, String game_display, File game_image, int game_year, String game_company, String game_description, EmulatorType type) throws Exception {
-		this.GAME = game;
-		this.GAME_DISPLAY = game_display;
-		this.GAME_NAME = game_name;
-		this.GAME_IMAGE = game_image;
-		this.GAME_YEAR = game_year;
-		this.GAME_COMPANY = game_company;
-		this.GAME_DESCRIPTION = game_description;
-		this.TYPE = type;
+public class Game {
+    //modules
+    private SaveManager saveManager;
+    private Emulator emulator;
+    private GameGUIBuilder guiBuilder;
 
-		this.saveManager = new SaveManager(GAME_NAME, LibraryEngine.PLAYABLE_DIRECTORY);
-		this.emulator = Emulator.getEmulator(TYPE);
-	}
+    //game vars
+    private final File GAME;
+    private final String GAME_NAME;
+    private final String GAME_DISPLAY;
+    private final File GAME_IMAGE;
+    private final int GAME_YEAR;
+    private final String GAME_COMPANY;
+    private final String GAME_DESCRIPTION;
+    private final EmulatorType TYPE;
 
-	public void start(int saveIndex){
-		//determine whether new game or load game
-		if(saveIndex != -1)
-			//this.saveManager.copySave(saveIndex);
-		
-		//start game emulation		
-		this.emulator.start(this.GAME);
-	}
 
-	public String getName(){
-	    return this.GAME_NAME;
+    //constructor
+    public Game(String game_name, File game, String game_display, File game_image, int game_year, String game_company, String game_description, EmulatorType type) throws Exception {
+        this.GAME = game;
+        this.GAME_DISPLAY = game_display;
+        this.GAME_NAME = game_name;
+        this.GAME_IMAGE = game_image;
+        this.GAME_YEAR = game_year;
+        this.GAME_COMPANY = game_company;
+        this.GAME_DESCRIPTION = game_description;
+        this.TYPE = type;
+
+        this.saveManager = new SaveManager(GAME_NAME, LibraryEngine.PLAYABLE_DIRECTORY);
+        this.emulator = Emulator.getEmulator(TYPE);
     }
 
-	@Override
-	public String toString(){
-		StringBuilder sb = new StringBuilder();
-		sb.append(GAME_DISPLAY).append(" ")
-				.append(GAME_YEAR).append(" ")
-				.append(GAME_COMPANY).append(" ")
-				.append(GAME_DESCRIPTION);
+    public void start(int saveIndex) {
+        //determine whether new game or load game
+        if (saveIndex != -1)
+            //this.saveManager.copySave(saveIndex);
 
-		return (sb.toString());
-	}
+            //start game emulation
+            this.emulator.start(this.GAME);
+    }
 
-	public Button getButton(){
+    public String getName() {
+        return this.GAME_NAME;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(GAME_DISPLAY).append(" ")
+                .append(GAME_YEAR).append(" ")
+                .append(GAME_COMPANY).append(" ")
+                .append(GAME_DESCRIPTION);
+
+        return (sb.toString());
+    }
+
+    public Button getButton() {
         Button b = new Button();
-	    try {
+        try {
             b.setStyle("-fx-background-image: url('covers/" + GAME_IMAGE.getName() + "'); " +
                     "   -fx-background-position: center center;" +
                     "   -fx-background-color: rgba(255, 255, 255, 0.5);" +
-					"	-fx-background-size: cover"
-			);
+                    "	-fx-background-size: cover"
+            );
             double length = Screen.getPrimary().getVisualBounds().getWidth();
             b.setMinSize(WINDOW_X / NUM_ITEMS_ROW, WINDOW_Y / NUM_ITEMS_ROW);
             b.setMaxSize(WINDOW_X / NUM_ITEMS_ROW, WINDOW_Y / NUM_ITEMS_ROW);
@@ -94,12 +94,13 @@ public class Game{
                     Window.window.show();
                 }
             });
-        }catch (Exception c){}
+        } catch (Exception c) {
+        }
 
         return (b);
     }
 
-    public Pane getSavePane(){
+    public Pane getSavePane() {
         GridPane main = new GridPane();
         GridPane about = new GridPane();
         GridPane saves = new GridPane();
@@ -111,7 +112,7 @@ public class Game{
         saves.setVgap(0);
         saves.setPadding(new Insets(0, 0, 0, 0));
 
-        for(int i = 0; i <= SaveManager.MAX_SAVE_INDEX; i++){
+        for (int i = 0; i <= SaveManager.MAX_SAVE_INDEX; i++) {
             saves.add(getSaveButton(saveManager.getSaves().length > i ? saveManager.getSaves()[i] : null), i % 2, i / 2);
         }
 
@@ -122,7 +123,7 @@ public class Game{
         about.setVgap(0);
         about.setPadding(new Insets(0, 0, 0, 0));
 
-        about.add(new ImageView("covers/" + GAME_IMAGE.getName()), 0, 0 );
+        about.add(new ImageView("covers/" + GAME_IMAGE.getName()), 0, 0);
 
         //configure main pane
         main.setHgap(0);
@@ -135,7 +136,7 @@ public class Game{
         return (main);
     }
 
-    private Button getSaveButton(File save){
+    private Button getSaveButton(File save) {
         Button b = new Button();
         try {
             b.setStyle("-fx-background-image: url('img/saveBackground.png'); " +
@@ -144,9 +145,9 @@ public class Game{
                     "	-fx-background-size: cover"
             );
 
-            if(save == null){
+            if (save == null) {
                 b.setText("NEW");
-            }else{
+            } else {
                 b.setText("Has Save");
             }
             double length = Screen.getPrimary().getVisualBounds().getWidth();
@@ -161,12 +162,11 @@ public class Game{
                     Window.resetPane();
                 }
             });
-        }catch (Exception c){}
+        } catch (Exception c) {
+        }
 
         return (b);
     }
-
-
 
 
 }

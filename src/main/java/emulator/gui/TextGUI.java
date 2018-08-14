@@ -5,7 +5,7 @@ import emulator.game.LibraryEngine;
 
 public class TextGUI {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("--------------------");
         System.out.println(" Emulator Text GUI");
         System.out.println("--------------------");
@@ -13,11 +13,11 @@ public class TextGUI {
         try {
 
             LibraryEngine le = new LibraryEngine();
-            for(Game g: le.getGames()){
+            for (Game g : le.getGames()) {
                 System.out.println(g.toString());
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 

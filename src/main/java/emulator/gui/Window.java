@@ -7,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -25,14 +24,14 @@ public class Window extends Application {
         WINDOW_Y = WINDOW_X;
         try {
             engine = new LibraryEngine();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         launch(args);
     }
 
-    public static void resetPane(){
+    public static void resetPane() {
         window.setScene(new Scene(getMainPane(), WINDOW_X, WINDOW_Y));
         window.show();
     }
@@ -46,7 +45,7 @@ public class Window extends Application {
         primaryStage.show();
     }
 
-    public static ScrollPane getMainPane(){
+    public static ScrollPane getMainPane() {
         ScrollPane pane = new ScrollPane();
         pane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         pane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -57,7 +56,7 @@ public class Window extends Application {
         grid.setPadding(new Insets(0, 0, 0, 0));
 
         int index = 0;
-        for(final Game g: engine.getGames()){
+        for (final Game g : engine.getGames()) {
             grid.add(g.getButton(), (index % NUM_ITEMS_ROW), index / NUM_ITEMS_ROW);
             index++;
         }

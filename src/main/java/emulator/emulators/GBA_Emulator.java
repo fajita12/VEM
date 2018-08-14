@@ -13,7 +13,7 @@ public class GBA_Emulator extends Emulator {
             System.out.println(buildcmd(game));
             Process pr = rt.exec(buildcmd(game));
             int res = pr.waitFor();
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("FAILED");
         }
     }
@@ -22,11 +22,11 @@ public class GBA_Emulator extends Emulator {
 
     }
 
-    private String buildcmd(File game, File save){
+    private String buildcmd(File game, File save) {
         return null;
     }
 
-    private String buildcmd(File game){
+    private String buildcmd(File game) {
         String gameString = game.getAbsolutePath();
 
         StringBuilder sb = new StringBuilder();

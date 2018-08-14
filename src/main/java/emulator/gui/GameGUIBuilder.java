@@ -1,14 +1,6 @@
 package emulator.gui;
 
 import emulator.game.Game;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.control.Button;
-import javafx.stage.Screen;
-
-import static emulator.gui.Window.NUM_ITEMS_ROW;
-import static emulator.gui.Window.WINDOW_X;
-import static emulator.gui.Window.WINDOW_Y;
 
 public class GameGUIBuilder{
 	private Game game;
