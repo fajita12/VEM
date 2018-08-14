@@ -14,6 +14,7 @@ public abstract class Emulator {
 
 	//abstract methods
 	public abstract void start(File game);
+	public abstract void start(File game, File save);
 
 	//static emulator builder
 	public static Emulator getEmulator(EmulatorType type) throws Exception {

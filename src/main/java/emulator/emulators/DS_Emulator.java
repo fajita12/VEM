@@ -6,4 +6,8 @@ public class DS_Emulator extends Emulator {
     public void start(File game) {
 
     }
+
+    public void start(File game, File save) {
+
+    }
 }

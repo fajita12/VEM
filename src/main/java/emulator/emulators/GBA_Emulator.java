@@ -11,14 +11,23 @@ public class GBA_Emulator extends Emulator {
         Runtime rt = Runtime.getRuntime();
         //Process pr = rt.exec("cmd /c dir");
         try {
-            Process pr = rt.exec("c:\\visualboyadvance-m.exe -f \"c:\\test.zip\"");
+            System.out.println(buildcmd(game));
+            Process pr = rt.exec(buildcmd(game));
         }catch(Exception e){
             System.out.println("FAILED");
         }
     }
 
+    public void start(File game, File save) {
+
+    }
+
+    private String buildcmd(File game, File save){
+        return null;
+    }
+
     private String buildcmd(File game){
-        String gameString = game.getAbsolutePath() + game.getName();
+        String gameString = game.getAbsolutePath();
 
         StringBuilder sb = new StringBuilder();
         sb.append(executable).append(" ")
