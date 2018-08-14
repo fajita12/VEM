@@ -1,6 +1,8 @@
-/.idea
-/target
+.idea/
+target/
 *.iml
+*.sav
+*.sgm
 
 # Compiled class file
 *.class
